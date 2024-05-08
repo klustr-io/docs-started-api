@@ -1,0 +1,34 @@
+web:
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD
+    max-age: 3600
+
+server:
+  port: 5001
+  error:
+    include-message: ALWAYS
+    include-stacktrace: NEVER
+
+management:
+  metrics:
+    export:
+      atlas:
+        enabled: false
+      datadog:
+        enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "info,metrics,prometheus,health"
+
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+  security:
+    oauth2:
+      resourceserver:
+        opaque-token:
+          introspection-uri: https://gateway.dev.klustr.io/oauth2/introspect
+          api-key: YOUR_KEY_HERE
